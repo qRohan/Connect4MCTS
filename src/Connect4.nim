@@ -52,13 +52,22 @@ proc newGameBoard*(grid: GameBoardGridType): GameBoard=
     return GameBoard(grid: grid)
 
 proc pretty_print_grid*(board: GameBoard): string =
+    
     result = $(board.grid)
+    result = result.replace(", ", ",")
     result = result.replace("[[", "[")
     result = result.replace("]]", "]")
-    result = result.replace("], ", "]\n")
-    result = result.replace($(Default), "  ")
-    result = result.replace($(Player1), "X ")
-    result = result.replace($(Player2), "O ")
+    result = result.replace("],", "]\n")
+    result = result.replace("[", "┝")
+    result = result.replace("]", "┥")
+    result = result.replace(",", "·")
+    result = result.replace($(Default), " ")
+    result = result.replace($(Player1), "X")
+    result = result.replace($(Player2), "O")
+    result &= "\n┕"
+    for i in 0..<BoardWidth-1:
+        result &= "┷━"
+    result &= "┷┙\n" 
     return result
 
 proc can_play(self: GameBoard, move: MoveType): bool = 
