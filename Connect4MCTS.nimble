@@ -12,3 +12,6 @@ namedBin      = {"main": "Connect4MCTS"}.toTable
 # Dependencies
 
 requires "nim >= 1.6.12"
+
+task windows, "build for windows using mingw":
+    exec "nimble c -d:release -d:mingw --out:Connect4MCTS.exe src/main.nim"
